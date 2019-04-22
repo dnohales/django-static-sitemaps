@@ -5,6 +5,10 @@ try:
 except ImportError:
     from io import StringIO
 
+# Upstream dropped Python 2 compatibility:
+# https://github.com/xaralis/django-static-sitemaps/issues/59
+from builtins import bytes
+
 import gzip
 import hashlib
 import os
