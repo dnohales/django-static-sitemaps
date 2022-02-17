@@ -1,7 +1,7 @@
 django-static-sitemaps
 ========================
 
-There are times when your site is too big to serve the ``sitemap.xml`` by your Django application. This little app is meant to help you with such cases. Instead of serving the sitemap.xml from Django, it features a **management command**/**celery task** that generates the ``sitemap.xml`` to the separate files.
+There are times when your site is too big to serve the ``sitemap.xml`` by your Django application. This little app is meant to help you with such cases. Instead of serving the sitemap.xml from Django, it features a **management command** that generates the ``sitemap.xml`` to the separate files.
 
 Feature highlights:
 
@@ -78,8 +78,6 @@ For Windows users you can alternatively use the following command:
 
 Done.
 
-Alternatively, you can run this using a Celery task runner. For details, look below.
-
 **Note:** Your sitemap files will be served from ``STATIC_URL`` by default. If your
 ``STATIC_URL`` is a relative one (e.g. ``/static/``), the result will be
 prepended the domain to respect the current ``Site`` object. If your
@@ -95,11 +93,6 @@ from the first element of the generated file, so reverse sorting your query
 by your date field will keep this information accurate. This is important to
 inform the crawler how fresh is the information inside each sitemap inside the
 sitemap_index.xml.
-
-Running as celery task
-----------------------
-
-If you run celery as your task runner, you should be ready to go out of the box. django-static-sitemaps includes the ``GenerateSitemap`` task which will be automatically run each ``STATICSITEMAPS_REFRESH_AFTER`` minutes (defaults to 60 ~ 1 hour). You can optionally bypass it by setting it to ``None``.
 
 Advanced settings
 ------------------
@@ -131,9 +124,6 @@ Advanced settings
 
 ``STATICSITEMAPS_PING_GOOGLE``
     Boolean determining whether to ping google after sitemaps have been updated. Defaults to ``True``. Please note that google will only be notified if something changed in the sitemap file set.
-
-``STATICSITEMAPS_REFRESH_AFTER``
-    How often (in minutes) should the celery task be run. Defaults to 60 minutes.
 
 ``STATICSITEMAPS_MOCK_SITE``
     True|False setting if you want to mock the Django sites framework. Useful if you want to use package without enabling django.contrib.sites. Defaults to False.
